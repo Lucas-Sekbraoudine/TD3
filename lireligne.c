@@ -12,11 +12,12 @@
  * @param size nombre maximum d'octets à lire
  * @return le nombre d'octets effectivement lus
  */
-int lireligne(int fd, char *s, int size) {
+int lireligne(int fd, char *s, int size) {.
     int count = 0;
     int sz = read(fd, s, size);
     for(int i = 0; i < sz; i++){
-        if (s[i] == '/n') {
+        if (s[i] == '\n') {
+            lseek(fd, count+1, 0);
             return count;
         }else{
             count++;
